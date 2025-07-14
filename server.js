@@ -8,7 +8,14 @@ const userRoutes = require('./routes/userRoutes');
 dotenv.config();
 
 const app = express();
-app.use(cors());
+// Allow CORS from local frontend and Vercel frontend
+app.use(cors({
+  origin: [
+    'http://localhost:5173', // local dev
+    'https://leaderboard-app-frontend.vercel.app' // replace with your actual Vercel frontend URL
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // API routes
